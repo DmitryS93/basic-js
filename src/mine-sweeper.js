@@ -23,9 +23,77 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper(matrix) {
+  //throw new NotImplementedError('Not implemented');
+  let newMatrix = []
+
+  for(let i=0; i<matrix.length; i++) {
+    newMatrix.push(matrix[i].slice())
+  }
+    for (i=0; i<newMatrix.length; i++) {
+      for (j=0; j<newMatrix[0].length; j++) {
+        newMatrix[i][j] = 0
+      }
+    }
+
+    for (i=0; i<newMatrix.length; i++) {
+      for (j=0; j<newMatrix[0].length; j++) {
+        if (matrix[i][j] === true) {
+          if(i===0 && j===0) {
+            newMatrix[i+1][j] = newMatrix[i+1][j] + 1
+            newMatrix[i+1][j+1] = newMatrix[i+1][j+1] + 1
+            newMatrix[i][j+1] = newMatrix[i][j+1] + 1
+          } else if (i===0 && j===(newMatrix[0].length-1)) {      
+          newMatrix[i][j-1] = newMatrix[i][j-1] + 1
+          newMatrix[i+1][j-1] = newMatrix[i+1][j-1] + 1
+          newMatrix[i+1][j] = newMatrix[i+1][j] + 1    
+          } else if (i===(newMatrix.length-1) && j===(newMatrix[0].length-1)) {   
+            newMatrix[i-1][j] = newMatrix[i-1][j] + 1
+            newMatrix[i-1][j-1] = newMatrix[i-1][j-1] + 1
+            newMatrix[i][j-1] = newMatrix[i][j-1] + 1
+          } else if (i===(newMatrix.length-1) && j=== 0) {   
+            newMatrix[i-1][j] = newMatrix[i-1][j] + 1
+            newMatrix[i][j+1] = newMatrix[i][j+1] + 1
+            newMatrix[i-1][j+1] = newMatrix[i-1][j+1] + 1
+          } else if (i === 0) {   
+            newMatrix[i][j-1] = newMatrix[i][j-1] + 1
+            newMatrix[i+1][j-1] = newMatrix[i+1][j-1] + 1
+            newMatrix[i+1][j] = newMatrix[i+1][j] + 1
+            newMatrix[i+1][j+1] = newMatrix[i+1][j+1] + 1
+            newMatrix[i][j+1] = newMatrix[i][j+1] + 1
+          } else if (j === 0) {   
+            newMatrix[i-1][j] = newMatrix[i-1][j] + 1
+            newMatrix[i+1][j] = newMatrix[i+1][j] + 1
+            newMatrix[i+1][j+1] = newMatrix[i+1][j+1] + 1
+            newMatrix[i][j+1] = newMatrix[i][j+1] + 1
+            newMatrix[i-1][j+1] = newMatrix[i-1][j+1] + 1
+          } else if (j===(newMatrix[0].length-1)) { 
+            newMatrix[i-1][j] = newMatrix[i-1][j] + 1
+            newMatrix[i-1][j-1] = newMatrix[i-1][j-1] + 1
+            newMatrix[i][j-1] = newMatrix[i][j-1] + 1
+            newMatrix[i+1][j-1] = newMatrix[i+1][j-1] + 1
+            newMatrix[i+1][j] = newMatrix[i+1][j] + 1
+          } else if (j===(newMatrix.length-1)) { 
+            newMatrix[i-1][j] = newMatrix[i-1][j] + 1
+            newMatrix[i-1][j-1] = newMatrix[i-1][j-1] + 1
+            newMatrix[i][j-1] = newMatrix[i][j-1] + 1
+            newMatrix[i][j+1] = newMatrix[i][j+1] + 1
+            newMatrix[i-1][j+1] = newMatrix[i-1][j+1] + 1
+          } else {
+          newMatrix[i-1][j] = newMatrix[i-1][j] + 1
+          newMatrix[i-1][j-1] = newMatrix[i-1][j-1] + 1
+          newMatrix[i][j-1] = newMatrix[i][j-1] + 1
+          newMatrix[i+1][j-1] = newMatrix[i+1][j-1] + 1
+          newMatrix[i+1][j] = newMatrix[i+1][j] + 1
+          newMatrix[i+1][j+1] = newMatrix[i+1][j+1] + 1
+          newMatrix[i][j+1] = newMatrix[i][j+1] + 1
+          newMatrix[i-1][j+1] = newMatrix[i-1][j+1] + 1
+          }
+        }
+        
+      }
+    }
+    return newMatrix
 }
 
 module.exports = {
